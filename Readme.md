@@ -31,7 +31,8 @@ Block_needed = NBT2CSV(filename = "GlobalPathTo\\YourFile.nbt", exportCSV = True
 Combining two block dictionaries
 
 ```py
-
+# Combine two block count dicts into one.
+CombineElements(PaletteA = {"block_name":1}, PaletteB = {"block_name":5})
 ```
 
 

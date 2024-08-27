@@ -68,7 +68,8 @@ def main():
 
     file_counter = 0
     for file_name in input_directory:
-
+        if not file_name.__contains__(".nbt"):
+           continue
         print ("found ./input/" + file_name)
         file_counter+=1
 
@@ -78,6 +79,10 @@ def main():
     while file_counter < len(input_directory):
 
         file_name = str(input_directory[file_counter])
+
+        if not file_name.__contains__(".nbt"):
+            file_counter+=1
+            continue
 
         print ("converting ./input/" + file_name)
         filename = "./input/" + file_name
