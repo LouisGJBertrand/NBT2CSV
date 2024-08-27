@@ -32,7 +32,7 @@ Combining two block dictionaries
 
 ```py
 # Combine two block count dicts into one.
-CombineElements(PaletteA = {"block_name":1}, PaletteB = {"block_name":5})
+CombinedDict = CombineElements(PaletteA = {"block_name":1}, PaletteB = {"block_name":5})
 ```
 
 
