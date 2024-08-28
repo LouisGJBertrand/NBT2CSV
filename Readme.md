@@ -66,6 +66,6 @@ pip install NBT
 Tool:
 MIT License Standard - (C) Louis BERTRAND
 
-Initial method for reading NBT Data
+Initial method for reading NBT Data (answer by hc_dev)
 https://stackoverflow.com/questions/74857267/how-do-i-convert-a-string-nbt-into-json-with-python
 ```
