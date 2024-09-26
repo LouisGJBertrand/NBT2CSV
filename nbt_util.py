@@ -3,6 +3,13 @@ import os
 import re
 from nbt import nbt # type: ignore
 
+
+SCRIPT_AUTH = "Louis 'Loé' BERTRAND <github@louisgjbertrand>"
+SCRIPT_NAME = "NBT TO CSV UTIL"
+SCRIPT_DESCRIPTION = "Made For GoodSoup <3"
+SCRIPT_VERSION = "v1.1"
+
+
 def CombineElements(PaletteA: dict, PaletteB: dict):
 
     for key in PaletteB:
@@ -107,10 +114,10 @@ def NBT2CSV(filename, exportCSV = True):
 
 def main():
     
-    print("NBT TO CSV UTIL")
-    print("Author Louis 'Loé' BERTRAND <github@louisgjbertrand>")
-    print("Made For GoodSoup <3")
-    print("version 1.0\n\n")
+    print(SCRIPT_NAME)
+    print("Author "+SCRIPT_AUTH)
+    print(SCRIPT_DESCRIPTION)
+    print("version "+SCRIPT_VERSION+"\n\n")
 
     input_directory = os.listdir("./input")
     GlobalBlockCount = {}
