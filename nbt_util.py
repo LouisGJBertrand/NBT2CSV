@@ -1,4 +1,6 @@
+from asyncio.windows_events import NULL
 import os
+import re
 from nbt import nbt # type: ignore
 
 def CombineElements(PaletteA: dict, PaletteB: dict):
@@ -12,11 +14,7 @@ def CombineElements(PaletteA: dict, PaletteB: dict):
 
     return PaletteA
 
-def NBT2CSV(filename, exportCSV = True):
-
-    nbtfile = nbt.NBTFile(filename,'rb')
-
-    
+def CreateModNBT(nbtfile, exportCSV = True, filename = NULL):
     palette_data = nbtfile["palette"]
     blocks = nbtfile["blocks"]
 
@@ -53,8 +51,60 @@ def NBT2CSV(filename, exportCSV = True):
         f = open(filename.replace("input", "output").replace(".nbt", ".csv"), "w")
         f.write(csv)
         f.close()
-
     return block_dict
+
+    
+def WorldEditNBT(nbtfile, exportCSV = True, filename = NULL):
+    palette_data = nbtfile["Palette"]
+    blocks = nbtfile["Data"]
+
+    palette = []
+    i = 0
+    for palette_el in palette_data:
+
+        el_name = str(palette_el)
+
+        palette.append(re.sub("[\(\[].*?[\)\]]", "",el_name).replace("[]",""))
+        i+=1
+        continue
+
+    block_dict = {}
+    for blocks_list_element in blocks:
+        # the id has to be converted to integer
+        palette_block_name = palette[blocks_list_element]
+
+        if(block_dict.__contains__(palette_block_name)):
+            block_dict[palette_block_name] += 1
+            continue
+        block_dict[palette_block_name] = 1
+
+
+    if exportCSV:
+        csv = "block_name,count\n"
+
+        for key in block_dict:
+            block_name = key
+            csv += "\""+block_name+"\","+str(block_dict[block_name])+"\n"
+
+        f = open(filename.replace("input", "output").replace(".nbt", ".csv"), "w")
+        f.write(csv)
+        f.close()
+    return block_dict
+
+def NBT2CSV(filename, exportCSV = True):
+
+    nbtfile = nbt.NBTFile(filename,'rb')
+
+
+    if("palette" in nbtfile.keys()):
+        block_dict = CreateModNBT(nbtfile, exportCSV, filename)
+        return block_dict
+
+    if("Schematic" in nbtfile.keys()):
+        block_dict = WorldEditNBT(nbtfile["Schematic"]["Blocks"], exportCSV, filename)
+        print(block_dict)
+        exit()
+
 
 def main():
     
