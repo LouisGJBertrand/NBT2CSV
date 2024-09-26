@@ -102,8 +102,7 @@ def NBT2CSV(filename, exportCSV = True):
 
     if("Schematic" in nbtfile.keys()):
         block_dict = WorldEditNBT(nbtfile["Schematic"]["Blocks"], exportCSV, filename)
-        print(block_dict)
-        exit()
+        return block_dict
 
 
 def main():
